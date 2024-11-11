@@ -4,6 +4,7 @@ import viteLogo from '/vite.svg';
 import './App.css';
 
 function App() {
+  const [points,setPoints]=useState([])
   const [deck, setDeck] = useState([]);
 
   useEffect(() => {
@@ -13,7 +14,7 @@ function App() {
         fetch(`https://deckofcardsapi.com/api/deck/${data.deck_id}/draw/?count=4`)
           .then(res => res.json())
           .then(drawData => {
-            setDeck(drawData.cards);
+            setDeck(drawData);
           });
       });
   }, []);
@@ -23,11 +24,11 @@ function App() {
       {deck.length >= 4 ? (
         <>
         <center>
-        <img src={deck[0].image} alt="Card 1" />
-          <img src={deck[1].image} alt="Card 2" />
+        <img src={deck[0]["cards"]["image"]} alt="Card 1" />
+          <img src={deck[1]["cards"]["image"]} alt="Card 2" />
           <br />
-          <img src={deck[2].image} alt="Card 3" />
-          <img src={deck[3].image} alt="Card 4" />
+          <img src={deck[2]["cards"]["image"]} alt="Card 3" />
+          <img src={deck[3]["cards"]["image"]} alt="Card 4" />
         </center>
 
         </>
